@@ -9,7 +9,7 @@ module.exports = Object.freeze({
   INDEX_DOMAIN: 'https://hypercianstand.veis.workers.dev/001/', //Get it from here https://gdindex-code-builder.glitch.me/
   GDRIVE_PARENT_DIR_ID: '1I5P5h4vuEd1DIkHikutgijykOxqpMYwr',
   SUDO_USERS: [253131957],	// Telegram user IDs. These users can use the bot in any chat.
-  AUTHORIZED_CHATS: [1001430489227],	// Telegram chat IDs. Anyone in these chats can use the bot.
+  AUTHORIZED_CHATS: [-1001430489227],	// Telegram chat IDs. Anyone in these chats can use the bot.
   STATUS_UPDATE_INTERVAL_MS: 12000, // A smaller number will update faster, but might cause rate limiting
   DRIVE_FILE_PRIVATE: {
     ENABLED: false,
