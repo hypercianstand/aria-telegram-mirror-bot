@@ -31,12 +31,12 @@ function downloadETA(totalLength: number, completedLength: number, speed: number
 
   if (hours === 0) {
     if (minutes === 0) {
-      return `${seconds}s`;
+      return `${seconds} S `;
     } else {
-      return `${minutes}m ${seconds}s`;
+      return `${minutes} M ${seconds} S `;
     }
   } else {
-    return `${hours}h ${minutes}m ${seconds}s`;
+    return `${hours} H ${minutes} M ${seconds} S `;
   }
 }
 
@@ -145,7 +145,7 @@ export function generateStatusMessage(totalLength: number, completedLength: numb
   var progressString = generateProgress(progress);
   var speedStr = formatSize(speed);
   var eta = downloadETA(totalLength, completedLength, speed);
-  var type = isUploading ? '✈️ Uploading' : '✏️ File Name';
+  var type = isUploading ? '✈️ Uploading ' : '✏️ File Name';
   var message = `<b>${type}</b> : <code>${fileName}</code>\n<b>🛒 Size</b> : <code>${totalLengthStr}</code>\n<b>💸 Progress</b> : <code>${progressString}</code>\n<b>⚡️ Speed</b> : <code>${speedStr}ps</code>\n<b>⌛️ ETA</b> : <code>${eta}</code>`;
   var status = {
     message: message,
@@ -163,7 +163,7 @@ export interface StatusMessage {
 
 function generateProgress(p: number): string {
   p = Math.min(Math.max(p, 0), 100);
-  var str = '';
+  var str = ' ';
   var cFull = Math.floor(p / 8);
   var cPart = p % 8 - 1;
   str += '█'.repeat(cFull);
@@ -171,7 +171,7 @@ function generateProgress(p: number): string {
     str += PROGRESS_INCOMPLETE[cPart];
   }
   str += '░'.repeat(PROGRESS_MAX_SIZE - cFull);
-  str = `${str} ${p}%`;
+  str = `${str}  ${p}%`;
 
   return str;
 }
