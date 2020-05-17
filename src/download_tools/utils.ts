@@ -170,7 +170,7 @@ function generateProgress(p: number): string {
   if (cPart >= 0) {
     str += PROGRESS_INCOMPLETE[cPart];
   }
-  str += ' '.repeat(PROGRESS_MAX_SIZE - cFull);
+  str += '░'.repeat(PROGRESS_MAX_SIZE - cFull);
   str = `${str}] ${p}%`;
 
   return str;
