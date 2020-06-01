@@ -9,7 +9,7 @@ import dlm = require('../dl_model/dl-manager');
 var dlManager = dlm.DlManager.getInstance();
 
 const PROGRESS_MAX_SIZE = Math.floor(100 / 8);
-const PROGRESS_INCOMPLETE = ['▏', '▎', '▍', '▌', '▋', '▊', '▉'];
+const PROGRESS_INCOMPLETE = ['█', '█', '█', '█', '█', '█', '█'];
 
 export function deleteDownloadedFile(subdirName: string): void {
   fs.remove(`${constants.ARIA_DOWNLOAD_LOCATION}/${subdirName}`)
@@ -23,7 +23,7 @@ export function deleteDownloadedFile(subdirName: string): void {
 
 function downloadETA(totalLength: number, completedLength: number, speed: number): string {
   if (speed === 0)
-    return '-';
+    return '🔴';
   var time = (totalLength - completedLength) / speed;
   var seconds = Math.floor(time % 60);
   var minutes = Math.floor((time / 60) % 60);
@@ -31,12 +31,12 @@ function downloadETA(totalLength: number, completedLength: number, speed: number
 
   if (hours === 0) {
     if (minutes === 0) {
-      return `${seconds} S `;
+      return `🟢${seconds} S`;
     } else {
-      return `${minutes} M ${seconds} S `;
+      return `🟢${minutes} M ${seconds} - S`;
     }
   } else {
-    return `${hours} H ${minutes} M ${seconds} S `;
+    return `🟢${hours} H ${minutes} - M ${seconds} - S`;
   }
 }
 
@@ -70,7 +70,7 @@ function getSingleStatus(dlDetails: details.DlVars, msg?: TelegramBot.Message): 
         }
       });
     } else {
-      resolve({ message: `You aren't authorized to use this bot here.` });
+      resolve({ message: `You Aren't Authorized to Use This Bot Here` });
     }
   });
 }
@@ -111,7 +111,7 @@ export function getStatusMessage(): Promise<StatusAll> {
         };
       } else {
         return {
-          message: 'No active or queued downloads',
+          message: '⭕️⭕️⭕️ No Active or Queued Downloads ⭕️⭕️⭕️',
           totalDownloadCount: 0
         };
       }
@@ -146,7 +146,7 @@ export function generateStatusMessage(totalLength: number, completedLength: numb
   var speedStr = formatSize(speed);
   var eta = downloadETA(totalLength, completedLength, speed);
   var type = isUploading ? '✈️ Uploading ' : '✏️ File Name';
-  var message = `<b>${type}</b> : <code>${fileName}</code>\n<b>Size</b> : <code>${totalLengthStr}</code>\n<b>Progress</b> : <code>${progressString}</code>\n<b>⚡️ Speed</b> : <code>${speedStr}ps</code>\n<b>ETA</b> : <code>${eta}</code>`;
+  var message = `<b>${type}</b> : <code>{fileName}</code>\n<b>Size</b> : <code>${totalLengthStr}</code>\n<b>Progress</b> : <code>${progressString}</code>\n<b>⚡️ Speed</b> : <code>${speedStr}ps</code>\n<b>ETA</b> : <code>${eta}</code>`;
   var status = {
     message: message,
     filename: fileName,
@@ -171,7 +171,7 @@ function generateProgress(p: number): string {
     str += PROGRESS_INCOMPLETE[cPart];
   }
   str += '░'.repeat(PROGRESS_MAX_SIZE - cFull);
-  str = `${str}  ${p}%`;
+  str = `${str} ${p} %`;
 
   return str;
 }
